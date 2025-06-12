@@ -23,15 +23,21 @@ api.interceptors.request.use((config) => {
 export const login = async (usernameOrEmail: string, senha: string) => {
   try {
     console.log('Tentando login com:', { usernameOrEmail, senha });
-    
-    // Envia como "username" (mesmo que seja email)
+
     const response = await axios.post(`${API_URL}/auth/login`, {
-      username: usernameOrEmail, // Chave deve ser "username"
+      username: usernameOrEmail, // ou "usernameOrEmail", se for o nome esperado pelo backend
       senha
     });
 
     console.log('Resposta do backend:', response.data);
-    return response.data;
+
+    const { access_token, user } = response.data;
+
+    // Aqui está a conversão que resolve seu problema
+    return {
+      token: access_token,
+      usuario: user
+    };
 
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -45,6 +51,7 @@ export const login = async (usernameOrEmail: string, senha: string) => {
     throw error;
   }
 };
+
 
 export const getProfile = async (): Promise<Usuario> => {
   // O token será injetado automaticamente pelo interceptor

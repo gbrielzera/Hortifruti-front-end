@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage'; // Você precisará criar esta página
 import { useAuth } from './components/Auth/AuthProvider';
+import Dashboard from './pages/Dashboard'; // Você precisará criar esta página
 
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   const { usuario, loading } = useAuth();
@@ -17,6 +18,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route
           path="/"
           element={

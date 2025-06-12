@@ -1,4 +1,3 @@
- 
 import React, { useState } from 'react';
 import { useAuth } from './AuthProvider';
 import { useNavigate } from 'react-router-dom';
@@ -10,22 +9,25 @@ const LoginForm = () => {
   const { login, loading } = useAuth();
   const navigate = useNavigate();
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  try {
-    console.log('Tentando login com:', { email, senha });
-    const data = await login(email, senha);
-    console.log('Login bem-sucedido:', data);
-    navigate('/');
-  } catch (error) {
-    console.error('Erro no login:', error);
-    if (error instanceof Error) {
-      setError(error.message);
-    } else {
-      setError('Erro desconhecido ao fazer login.');
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      console.log('Tentando login com:', { email, senha });
+      await login(email, senha);
+      console.log('Login bem-sucedido');
+      
+      // Redireciona para uma página qualquer (exemplo: /dashboard)
+      navigate('/dashboard');
+      
+    } catch (error) {
+      console.error('Erro no login:', error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('Erro desconhecido ao fazer login.');
+      }
     }
-  }
-};
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">

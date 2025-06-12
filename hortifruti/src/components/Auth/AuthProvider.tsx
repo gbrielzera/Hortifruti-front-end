@@ -17,15 +17,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   const login = async (email: string, senha: string) => {
-    setLoading(true);
-    try {
-      const { token, usuario } = await apiLogin(email, senha);
-      localStorage.setItem('token', token);
-      setUsuario(usuario);
-    } finally {
-      setLoading(false);
-    }
-  };
+  setLoading(true);
+  try {
+    const { token, usuario } = await apiLogin(email, senha);
+    localStorage.setItem('token', token);
+    setUsuario(usuario);
+    return usuario;
+  } finally {
+    setLoading(false);
+  }
+};
 
   const logout = () => {
     localStorage.removeItem('token');
