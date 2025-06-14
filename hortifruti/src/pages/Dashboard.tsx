@@ -14,6 +14,10 @@ interface Produto {
     id_categoria: number;
     nome_categoria: string;
   };
+  estoque?: {
+    id_estoque: number;
+    quantidade: number;
+  };
 }
 
 export default function Dashboard() {
@@ -37,9 +41,7 @@ export default function Dashboard() {
       <Navbar />
       <main className="main-content">
         <h1>Bem-vindo ao Dashboard Hortifruti</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae.
-        </p>
+        <p>Veja nossos produtos frescos!</p>
 
         <div className="product-grid">
           {produtos.map((produto) => (
@@ -48,6 +50,7 @@ export default function Dashboard() {
               nome={produto.nome}
               imagem={`https://source.unsplash.com/400x300/?${produto.categoria.nome_categoria}`}
               preco={`R$ ${produto.valor.toFixed(2)}`}
+              estoque={`Estoque: ${produto.estoque?.quantidade ?? 0} unidades`}
             />
           ))}
         </div>
