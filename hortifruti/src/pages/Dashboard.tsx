@@ -1,9 +1,37 @@
 import Navbar from "../components/Dash/Navbar";
 import Footer from "../components/Dash/Footer";
 import ProductCard from "../components/Dash/ProductCard";
-import '../styles/Dashboard.css'
+import "../styles/Dashboard.css";
+import { getProdutos } from "../api/produto";
+import { useEffect, useState } from "react";
+
+interface Produto {
+  id: number;
+  nome: string;
+  descricao: string;
+  valor: number;
+  categoria: {
+    id_categoria: number;
+    nome_categoria: string;
+  };
+}
 
 export default function Dashboard() {
+  const [produtos, setProdutos] = useState<Produto[]>([]);
+
+  useEffect(() => {
+    const fetchProdutos = async () => {
+      try {
+        const data = await getProdutos();
+        setProdutos(data);
+      } catch (error) {
+        console.error("Erro ao buscar produtos:", error);
+      }
+    };
+
+    fetchProdutos();
+  }, []);
+
   return (
     <div className="dashboard">
       <Navbar />
@@ -14,21 +42,14 @@ export default function Dashboard() {
         </p>
 
         <div className="product-grid">
-          <ProductCard
-            nome="Maçã"
-            imagem="https://source.unsplash.com/400x300/?apple"
-            preco="R$ 4,99/kg"
-          />
-          <ProductCard
-            nome="Banana"
-            imagem="https://source.unsplash.com/400x300/?banana"
-            preco="R$ 3,99/kg"
-          />
-          <ProductCard
-            nome="Alface"
-            imagem="https://source.unsplash.com/400x300/?lettuce"
-            preco="R$ 2,99/unid"
-          />
+          {produtos.map((produto) => (
+            <ProductCard
+              key={produto.id}
+              nome={produto.nome}
+              imagem={`https://source.unsplash.com/400x300/?${produto.categoria.nome_categoria}`}
+              preco={`R$ ${produto.valor.toFixed(2)}`}
+            />
+          ))}
         </div>
       </main>
       <Footer />
