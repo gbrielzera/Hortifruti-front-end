@@ -30,7 +30,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit}>
       <div>
         <input
           type="email"
@@ -38,7 +38,6 @@ const LoginForm = () => {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
           required
-          className="w-full p-2 border rounded"
         />
       </div>
       <div>
@@ -48,17 +47,23 @@ const LoginForm = () => {
           onChange={(e) => setSenha(e.target.value)}
           placeholder="Senha"
           required
-          className="w-full p-2 border rounded"
         />
       </div>
-      {error && <p className="text-red-500 text-sm">{error}</p>}
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700 disabled:opacity-50"
-      >
-        {loading ? 'Entrando...' : 'Entrar'}
+      {error && <p>{error}</p>}
+      <button type="submit" disabled={loading}>
+        {loading ? "Entrando..." : "Entrar"}
       </button>
+
+      <div className="text-center mt-3 text-sm">
+        <p>Não tem uma conta? 👇</p>
+        <button
+          type="button"
+          onClick={() => navigate("/register")}
+          className="mt-1 text-green-600 hover:underline font-semibold"
+        >
+          Cadastre-se
+        </button>
+      </div>
     </form>
   );
 };

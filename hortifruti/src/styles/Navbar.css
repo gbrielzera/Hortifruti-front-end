@@ -1,0 +1,36 @@
+/* Navbar.css */
+.navbar {
+  width: 100%;
+  background-color: #4caf50;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  box-sizing: border-box;
+}
+
+.navbar .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar .links {
+  display: flex;
+  gap: 30px;
+}
+
+.navbar .links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar .links a:hover {
+  text-decoration: underline;
+}
+
+.navbar .profile-icon {
+  font-size: 26px;
+  cursor: pointer;
+}
