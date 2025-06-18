@@ -26,3 +26,6 @@ Joelma Giovanna Barbosa UC23200743
 
 João Pedro Nunes Neto UC23200137
 
+# Video da explicação:
+https://www.youtube.com/watch?v=agov_f07DBc
+
