@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { type Produto } from '../../types/produto'
+import type { Produto } from '../../types/produto';
 
 interface CartModalProps {
   produto: Produto;
