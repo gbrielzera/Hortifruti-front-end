@@ -1,13 +1,13 @@
 # Requisitos do front:
 
-- React
-
+# React
 npm install react react-dom
 
-- Vite
-
+# Vite
 npm install -D vite
 
-- Axios
-
+# Axios
 npm install axios
+
+# Rodar o servidor:
+npm run dev
